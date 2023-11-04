@@ -4,6 +4,7 @@ window.onload = () => {
     reset = document.getElementById("reset");
     word = document.getElementById("word");
     res = document.getElementById("res");
+    hint = document.getElementById("hint");
 
     newGame();
 
@@ -12,6 +13,8 @@ window.onload = () => {
     });
 
     reset.addEventListener('click', newGame);
+
+    hint.addEventListener('click', showHint);
 }
 
 // Array with solutions
@@ -44,6 +47,8 @@ var solution;
 var solutionVisible;
 var lives;
 var res;
+var hint;
+var hintAvailable;
 
 // Starts the game
 function newGame(){
@@ -55,6 +60,8 @@ function newGame(){
     lives = 0;
     img.src = "img/0.png";
     res.innerHTML = "";
+    hintAvailable = true;
+    hint.style.display = "inline";
 
     alphabet.forEach(element => {
         element.style.backgroundColor = "white";
@@ -82,7 +89,7 @@ function checkLetter(e){
             wrongLetter(e.target);
         }
     }
-    
+    console.log(solution)
 }
 
 // Print the word with the update changes
@@ -136,3 +143,38 @@ function endGame(win){
         element.style.backgroundColor = finalColor;
     });
 }
+
+function showHint(){
+    if(hintAvailable){
+
+        let i = findIndex();
+        let iRandom = Math.floor(Math.random()*i.length);
+
+        let solutionVisibleSplit = solutionVisible.split('');
+        solutionVisibleSplit[iRandom] = solution[iRandom];
+        solutionVisible = solutionVisibleSplit.join('');
+
+        printWord();
+        disableLetter(solutionVisibleSplit[iRandom]);
+        hintAvailable = false;
+        hint.style.display = "none";
+    }
+}
+
+function disableLetter(letter){
+    alphabet.forEach(element => {
+        if(element.innerHTML === letter){
+            element.disabled = true;
+        }
+    });
+}
+
+function findIndex() {
+    let positions = [];
+    for (let i = 0; i < solutionVisible.length; i++) {
+      if (solutionVisible[i] === "_") {
+        positions.push(i);
+      }
+    }
+    return positions;
+  }

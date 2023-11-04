@@ -58,6 +58,7 @@ main{
 
 main>p{
     margin: 20px;
+    text-align: center;
 }
 
 #word{
@@ -95,19 +96,19 @@ main>p{
     transform: translateY(0);
 }
 
-#alphabet button:disabled{
-    box-shadow: none;
-    background-color: rgb(255, 0, 0);
-}
-
 #alphabet button:disabled:hover{
     transform: none;
 }
 
-#reset{
+#alphabet button:disabled{
+    box-shadow: none;
+}
+
+#reset, #hint{
     background-color: black;
     margin: 20px;
-    width: 100px;
+    width: fit-content;
+    padding: 8px 15px;
     height: 40px;
     font-size: 20px;
     color:white;
@@ -122,6 +123,6 @@ main>p{
 @media screen and (max-width: 800px){
     #word{
         letter-spacing: 5px;
-        
+
     }
 }

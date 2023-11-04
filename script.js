@@ -89,7 +89,6 @@ function checkLetter(e){
             wrongLetter(e.target);
         }
     }
-    console.log(solution)
 }
 
 // Print the word with the update changes
@@ -149,7 +148,6 @@ function showHint(){
         
         let i = findIndex();
         let iRandom = Math.floor(Math.random()*i.length);
-        console.log(iRandom)
 
         let solutionVisibleSplit = solutionVisible.split('');
         solutionVisibleSplit[i[iRandom]] = solution[i[iRandom]];

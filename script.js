@@ -146,18 +146,23 @@ function endGame(win){
 
 function showHint(){
     if(hintAvailable){
-
+        
         let i = findIndex();
         let iRandom = Math.floor(Math.random()*i.length);
+        console.log(iRandom)
 
         let solutionVisibleSplit = solutionVisible.split('');
-        solutionVisibleSplit[iRandom] = solution[iRandom];
+        solutionVisibleSplit[i[iRandom]] = solution[i[iRandom]];
         solutionVisible = solutionVisibleSplit.join('');
 
         printWord();
         disableLetter(solutionVisibleSplit[iRandom]);
         hintAvailable = false;
         hint.style.display = "none";
+
+        if(solution === solutionVisible){
+            endGame(true);
+        }
     }
 }
 

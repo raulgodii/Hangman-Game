@@ -118,3 +118,10 @@ main>p{
     font-weight: bold;
     font-size: 50px;
 }
+
+@media screen and (max-width: 800px){
+    #word{
+        letter-spacing: 5px;
+        
+    }
+}

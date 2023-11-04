@@ -99,3 +99,8 @@ main>p{
     color:white;
     border-radius: 0.75em;
 }
+
+#res{
+    font-weight: bold;
+    font-size: 50px;
+}

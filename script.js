@@ -3,6 +3,7 @@ window.onload = () => {
     alphabet = document.querySelectorAll("#alphabet button");
     reset = document.getElementById("reset");
     word = document.getElementById("word");
+    res = document.getElementById("res");
 
     newGame();
 
@@ -27,8 +28,8 @@ var words = [
     "PLANTA",
     "EDIFICIO",
     "MONTAÑA",
-    "OCÉANO",
-    "AVIÓN",
+    "OCEANO",
+    "AVION",
     "PERRO",
     "GATO",
     "CASA",
@@ -42,7 +43,7 @@ var word;
 var solution;
 var solutionVisible;
 var lives;
-
+var res;
 
 // Starts the game
 function newGame(){
@@ -50,10 +51,13 @@ function newGame(){
     solutionVisible = ""
     setSolutionVisible();
     printWord();
-    lives = 1;
-    img.src = "img/1.png";
+    word.style.color = "black";
+    lives = 0;
+    img.src = "img/0.png";
+    res.innerHTML = "";
 
     alphabet.forEach(element => {
+        element.style.backgroundColor = "white";
         element.disabled = false;
     });
 }
@@ -72,8 +76,8 @@ function checkLetter(e){
         e.target.disabled = true;
         printWord();
     } else {
-        if(lives == 9){
-            endGame();
+        if(lives == 8){
+            endGame(false);
         } else{
             wrongLetter(e.target);
         }
@@ -97,6 +101,10 @@ function showLetter(letter){
     }
 
     solutionVisible = solutionVisibleSplit.join('');
+
+    if(solution === solutionVisible){
+        endGame(true);
+    }
 }
 
 // Cross and disable the letter when is wrong, and update the image
@@ -107,8 +115,24 @@ function wrongLetter(letter){
     letter.disabled = true;
 }
 
-function endGame(){
+function endGame(win){
+    if(win){
+        word.style.color = "green";
+        res.innerHTML = "YOU WIN!"
+        res.style.color = "green";
+        finalColor = "green";
+    }else{
+        word.style.color = "red";
+        res.innerHTML = "YOU LOST!"
+        res.style.color = "red";
+        finalColor = "red";
+    }
+    word.innerHTML = solution;
+    
+    img.src = "img/9.png";
+    
     alphabet.forEach(element => {
         element.disabled = true;
+        element.style.backgroundColor = finalColor;
     });
 }
